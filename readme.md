@@ -1,1 +1,1 @@
-# A collection of weird things in Dart ideal for cruel interview questions
+# A collection of weird things I found in Dart ideal for cruel interview questions

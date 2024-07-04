@@ -1,0 +1,59 @@
+    enum Foo {
+      bar,
+      baz,
+    }
+    
+
+By just simply looking at this code, I thought it would print `bar, baz` and then `barr, bazz`
+
+
+
+
+
+    void main() {
+      final f = Foo.bar;
+      switch (f) {
+        case Foo.bar:
+        case Foo.baz:
+          print("bar, baz");
+      }
+    
+      switch (f) {
+        case Foo.bar:
+          if (false) {
+            return;
+          }
+        case Foo.baz:
+          print("barr, bazz");
+      }
+    }
+
+
+It seems obvious right ? if (false) is never called, so it won't return, it will fall to the next switch case. 
+
+But no . It prints `bar, baz` 
+
+What are the two code block not equivalent ? What is the design choice behind this and how does it compare to other languages. Or this is just Yet another Dart bug
+
+
+
+**Update**:
+
+I tested it JS, JS works the way I thought. Not date
+
+    let day;
+    switch (0) {
+      case 0:
+      if (false) {
+      	break;
+      }
+      
+      case 1:
+        
+      case 2:
+        day = "Tuesday"; // prints this
+        break;
+      case 3:
+        day = "Wednesday";
+        break;
+    }
